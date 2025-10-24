@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcuSense - Segurança Inteligente para Empreendimentos de Alto Padrão | QAP TI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a3a52;
+            --accent: #c9a961;
+            --dark: #0f1419;
+            --light: #f8f9fa;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header Premium */
+        .header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(201, 169, 97, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        
+        .brand-hikvision {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: white;
+            letter-spacing: 3px;
+        }
+        
+        .brand-divider {
+            width: 2px;
+            height: 40px;
+            background: var(--accent);
+        }
+        
+        .brand-qap {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+        
+        .headline {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 32px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subheadline {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            text-align: center;
+            opacity: 0.92;
+            max-width: 800px;
+            margin: 0 auto 48px;
+            font-weight: 400;
+        }
+        
+        .problem-box {
+            background: rgba(231, 76, 60, 0.08);
+            border-left: 4px solid var(--danger);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+        
+        .problem-title {
+            font-size: 1.4rem;
+            color: var(--danger);
+            margin-bottom: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .problem-list {
+            list-style: none;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+        
+        .problem-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            opacity: 0.95;
+        }
+        
+        .problem-list li::before {
+            content: '×';
+            position: absolute;
+            left: 0;
+            font-size: 2rem;
+            color: var(--danger);
+            font-weight: 300;
+            top: 4px;
+        }
+        
+        .solution-highlight {
+            background: linear-gradient(135deg, var(--success), #27ae60);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 32px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(46, 204, 113, 0.25);
+        }
+        
+        /* Video Section */
+        .video-section {
+            padding: 100px 24px;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .video-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Critical Areas */
+        .critical-section {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        }
+        
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .area-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 32px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        
+        .area-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+            border-color: var(--accent);
+        }
+        
+        .area-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+        
+        .area-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .area-description {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        
+        .area-features {
+            list-style: none;
+        }
+        
+        .area-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .area-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .area-features li::before {
+            content: '•';
+            color: var(--accent);
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        /* ROI Section */
+        .roi-section {
+            padding: 100px 24px;
+            background: white;
+        }
+        
+        .roi-explanation {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 64px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .roi-explanation h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        
+        .roi-calculation {
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+        
+        .calc-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 1.05rem;
+        }
+        
+        .calc-line:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--success);
+            padding-top: 24px;
+            margin-top: 16px;
+            border-top: 2px solid var(--accent);
+        }
+        
+        .calc-label {
+            color: var(--text-secondary);
+        }
+        
+        .calc-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 64px;
+        }
+        
+        .comparison-card {
+            background: white;
+            border-radius: 16px;
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .comparison-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        
+        .comparison-old::before {
+            background: var(--danger);
+        }
+        
+        .comparison-new::before {
+            background: var(--success);
+        }
+        
+        .comparison-icon {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+        }
+        
+        .comparison-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--primary);
+        }
+        
+        .comparison-stat {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+            margin: 24px 0;
+        }
+        
+        .comparison-old .comparison-stat {
+            color: var(--danger);
+        }
+        
+        .comparison-new .comparison-stat {
+            color: var(--success);
+        }
+        
+        .comparison-description {
+            color: var(--text-secondary);
+            margin: 16px 0;
+            font-size: 1.05rem;
+        }
+        
+        .comparison-features {
+            list-style: none;
+            margin-top: 32px;
+            text-align: left;
+        }
+        
+        .comparison-features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 24px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(201, 169, 97, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.92;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: #25D366;
+            color: white;
+            padding: 20px 48px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-btn i {
+            font-size: 1.8rem;
+        }
+        
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 16px 32px;
+            border-radius: 8px;
+            margin-top: 40px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 64px 24px 32px;
+            text-align: center;
+        }
+        
+        .footer-brand {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .footer-brand .accent {
+            color: var(--accent);
+        }
+        
+        .footer-description {
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+        
+        .footer-copyright {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        /* Botão WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            animation: pulse-float 2s ease-in-out infinite;
+        }
+        
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: #25D366;
+            border-radius: 50%;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-float i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        @keyframes pulse-float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                bottom: 16px;
+                right: 16px;
+            }
+            
+            .whatsapp-float a {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .whatsapp-float i {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .brand {
+                gap: 16px;
+            }
+            
+            .brand-divider {
+                height: 30px;
+            }
+            
+            .problem-box {
+                padding: 32px 24px;
+            }
+            
+            .areas-grid,
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .roi-calculation {
+                padding: 24px 20px;
+            }
+            
+            .calc-line {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+        
+        /* Animações suaves */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .area-card,
+        .comparison-card {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        
+        .area-card:nth-child(1) { animation-delay: 0.1s; }
+        .area-card:nth-child(2) { animation-delay: 0.2s; }
+        .area-card:nth-child(3) { animation-delay: 0.3s; }
+        .area-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header Premium -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <span class="brand-hikvision">HIKVISION</span>
+                    <div class="brand-divider"></div>
+                    <span class="brand-qap">QAP TI</span>
+                </div>
+                
+                <h1 class="headline">
+                    Suas Câmeras Gravam,<br>
+                    Mas Não Protegem em Tempo Real?
+                </h1>
+                
+                <p class="subheadline">
+                    Tecnologia AcuSense com IA que detecta e alerta sobre ameaças reais<br>
+                    em áreas críticas do seu empreendimento
+                </p>
+                
+                <div class="problem-box">
+                    <h3 class="problem-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Desafios Comuns em Condomínios de Alto Padrão no Rio
+                    </h3>
+                    <ul class="problem-list">
+                        <li>Câmeras antigas (720p) sem capacidade de análise inteligente</li>
+                        <li>Sistemas que apenas gravam, sem alertas em tempo real</li>
+                        <li>Instalações básicas sem configuração de áreas críticas</li>
+                        <li>Pessoas rondando perímetro após 22h sem notificação</li>
+                        <li>Falsos alarmes constantes que desgastam a equipe</li>
+                    </ul>
+                    
+                    <div style="text-align: center;">
+                        <span class="solution-highlight">
+                            ✓ AcuSense resolve com Inteligência Artificial embarcada
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Veja a Tecnologia em Ação</h2>
+                <p class="section-subtitle">
+                    Demonstração real de como o AcuSense diferencia pessoas e veículos de falsos alarmes
+                </p>
+            </div>
+            
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube-nocookie.com/embed/9G3IDU9wR2c?si=IgOZBXTgA15qFC_8&controls=0&start=5" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Critical Areas -->
+    <section class="critical-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Proteção Inteligente em Pontos Estratégicos</h2>
+                <p class="section-subtitle">
+                    Configuração profissional de áreas de interesse com regras específicas por horário
+                </p>
+            </div>
+            
+            <div class="areas-grid">
+                <div class="area-card">
+                    <span class="area-icon">🛡️</span>
+                    <h3 class="area-title">Perímetro e Muros</h3>
+                    <p class="area-description">
+                        Detecção inteligente de pessoas próximas aos muros, especialmente em horários noturnos
+                    </p>
+                    <ul class="area-features">
+                        <li>Linhas virtuais em pontos vulneráveis</li>
+                        <li>Alertas por tempo de permanência</li>
+                        <li>Detecção de aproximação suspeita</li>
+                        <li>Monitoramento 24/7 com IA</li>
+                    </ul>
+                </div>
+                
+                <div class="area-card">
+                    <span class="area-icon">🚪</span>
+                    <h3 class="area-title">Acessos e Janelas</h3>
+                    <p class="area-description">
+                        Identifica pessoas paradas tempo excessivo próximo a portas e janelas vulneráveis
+                    </p>
+                    <ul class="area-features">
+                        <li>Zonas de interesse em acessos</li>
+                        <li>Detecção de tentativas suspeitas</li>
+                        <li>Proteção para janelas térreas</li>
+                        <li>Notificações instantâneas</li>
+                    </ul>
+                </div>
+                
+                <div class="area-card">
+                    <span class="area-icon">🕐</span>
+                    <h3 class="area-title">Períodos Críticos</h3>
+                    <p class="area-description">
+                        Regras personalizadas para horários de maior vulnerabilidade
+                    </p>
+                    <ul class="area-features">
+                        <li>Sensibilidade aumentada após 22h</li>
+                        <li>Detecção de veículos parados</li>
+                        <li>Alertas para rondas noturnas</li>
+                        <li>Configuração por dia da semana</li>
+                    </ul>
+                </div>
+                
+                <div class="area-card">
+                    <span class="area-icon">🚗</span>
+                    <h3 class="area-title">Garagens e Estacionamento</h3>
+                    <p class="area-description">
+                        Proteção completa para veículos e áreas de acesso veicular
+                    </p>
+                    <ul class="area-features">
+                        <li>Identificação de veículos suspeitos</li>
+                        <li>Monitoramento de portões</li>
+                        <li>Proteção de boxes individuais</li>
+                        <li>Prevenção de arrombamentos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section class="roi-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Retorno Sobre Investimento</h2>
+                <p class="section-subtitle">
+                    Cálculo baseado em condomínio de 150 unidades no Rio de Janeiro
+                </p>
+            </div>
+            
+            <div class="roi-explanation">
+                <h3>📊 Como Calculamos a Economia Anual</h3>
+                
+                <div class="roi-calculation">
+                    <div class="calc-line">
+                        <span class="calc-label">Falsos alarmes sistema antigo (18/mês)</span>
+                        <span class="calc-value">216/ano</span>
+                    </div>
+                    <div class="calc-line">
+                        <span class="calc-label">Custo médio por atendimento (deslocamento + tempo)</span>
+                        <span class="calc-value">R$ 280</span>
+                    </div>
+                    <div class="calc-line">
+                        <span class="calc-label">Custo anual com falsos alarmes</span>
+                        <span class="calc-value">R$ 60.480</span>
+                    </div>
+                    <div class="calc-line">
+                        <span class="calc-label">Falsos alarmes com AcuSense (2/mês)</span>
+                        <span class="calc-value">24/ano</span>
+                    </div>
+                    <div class="calc-line">
+                        <span class="calc-label">Custo anual com AcuSense</span>
+                        <span class="calc-value">R$ 6.720</span>
+                    </div>
+                    <div class="calc-line">
+                        <span class="calc-label">Economia Anual Operacional</span>
+                        <span class="calc-value" style="color: var(--success);">R$ 53.760</span>
+                    </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); margin-top: 24px; font-size: 0.95rem;">
+                    * Valores baseados em dados reais de condomínios no RJ. Não inclui benefícios intangíveis como redução de estresse da equipe, aumento na segurança efetiva e valorização do imóvel.
+                </p>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card comparison-old">
+                    <span class="comparison-icon">⚠️</span>
+                    <h3 class="comparison-title">Sistema Convencional</h3>
+                    <div class="comparison-stat">18</div>
+                    <p class="comparison-description">Falsos alarmes por mês</p>
+                    <ul class="comparison-features">
+                        <li>📹 Câmeras 720p/1080p básicas</li>
+                        <li>🐱 Alarmes com animais e sombras</li>
+                        <li>😓 Equipe desgastada e desmotivada</li>
+                        <li>💸 R$ 60.480/ano em desperdício</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card comparison-new">
+                    <span class="comparison-icon">✅</span>
+                    <h3 class="comparison-title">Com AcuSense</h3>
+                    <div class="comparison-stat">2</div>
+                    <p class="comparison-description">Falsos alarmes por mês</p>
+                    <ul class="comparison-features">
+                        <li>🤖 IA que diferencia ameaças reais</li>
+                        <li>🎯 Detecção precisa de pessoas/veículos</li>
+                        <li>😊 Equipe focada no essencial</li>
+                        <li>💰 Economia de R$ 53.760/ano</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">
+                Modernize a Segurança do<br>
+                Seu Empreendimento
+            </h2>
+            
+            <p class="cta-subtitle">
+                Solicite uma análise técnica gratuita do seu sistema atual<br>
+                e receba um projeto personalizado com cálculo de ROI específico
+            </p>
+            
+            <a href="https://wa.me/5521981908033?text=Olá!%20Gostaria%20de%20solicitar%20uma%20análise%20técnica%20do%20sistema%20de%20câmeras%20e%20conhecer%20mais%20sobre%20a%20tecnologia%20AcuSense." class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i>
+                Solicitar Análise Técnica
+            </a>
+            
+            <div class="trust-badge">
+                <i class="fas fa-shield-check"></i>
+                Projeto Personalizado • Instalação Profissional • Suporte Especializado
+            </div>
+        </div>
+    </section>
+
+    <!-- Botão WhatsApp Flutuante -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/5521981908033?text=Olá!%20Gostaria%20de%20solicitar%20uma%20análise%20técnica%20do%20sistema%20de%20câmeras%20e%20conhecer%20mais%20sobre%20a%20tecnologia%20AcuSense." target="_blank" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <span class="accent">QAP TI</span>
+            </div>
+            <p class="footer-description">
+                Especialistas em projetos de segurança inteligente para empreendimentos de alto padrão.<br>
+                Instalação profissional com configuração avançada de IA e áreas de interesse.
+            </p>
+            <div class="footer-copyright">
+                © 2025 QAP TI - Todos os direitos reservados
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer para animações suaves
+        document.addEventListener
